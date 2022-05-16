@@ -15,24 +15,7 @@ class CalcController {
 		this.initButtonsEvents();
 		this.initKeyboard();
 	}
-
-	pasteFromClipBoard() {
-		document.addEventListener('paste', e => {
-			let text = e.clipboardData.getData('text');
-			this.displayCalc = parseFloat(text);
-			console.log(text);
-		})
-	}
 	
-	copyToClipboard() { // tenho que copiar duas vezes para copiar
-		let input = document.createElement('input');
-		input.value = this.displayCalc;
-		document.body.appendChild(input);
-		input.select();
-		navigator.clipboard.writeText(input.value);
-		input.remove();
-	}
-
 	initialize() {
 		this.setDisplayDateTime();
 
@@ -49,6 +32,23 @@ class CalcController {
 				this.toggleAudio();
 			})
 		})
+	}
+
+	pasteFromClipBoard() {
+		document.addEventListener('paste', e => {
+			let text = e.clipboardData.getData('text');
+			this.displayCalc = parseFloat(text);
+			console.log(text);
+		})
+	}
+	
+	copyToClipboard() {
+		let input = document.createElement('input');
+		input.value = this.displayCalc;
+		document.body.appendChild(input);
+		input.select();
+		navigator.clipboard.writeText(input.value);
+		input.remove();
 	}
 
 	toggleAudio() {
